@@ -45,6 +45,7 @@ function playRound(playerSelection, computerSelection) {
 //final function playGame include 5 rounds
 function playGame() {
     for (let i = 0; i < 5; i++) {
+        console.log(`round(${i+1})`);
     const playerSelection = prompt("Enter 'rock' 'scissor' or 'paper'").toLowerCase();
     const computerSelection = getComputerChoice();
     const currentRound = playRound(playerSelection, computerSelection);
