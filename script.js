@@ -15,55 +15,89 @@ function getComputerChoice() {
             choice = "paper";
 
     }
-    console.log(choice);
+
     return choice;
 }
 
 // function for that plays a single round of Rock Paper Scissors
 function playRound(playerSelection, computerSelection) {
     if (computerSelection === playerSelection) {
-        return "The game is tie";
+        return ` Game Tie! computer select : ${computerSelection} you also select : ${playerSelection}`;
     }
     else if (computerSelection === "scissor" && playerSelection === "paper") {
-        computerSoccer++;
-        return "You Lose! scissor beats paper";
+        computerScore++;
+        return "You Lose! computer select : scissor beats you select : paper";
     }
     else if (computerSelection === "paper" && playerSelection === "rock") {
-        computerSoccer++;
-        return "You Lose! paper beats rock";
+        computerScore++;
+        return "You Lose! computer select : paper beats you select : rock";
     }
     else if (computerSelection === "rock" && playerSelection === "scissor") {
-        computerSoccer++;
-        return "You Lose! rock beats scissor";
+        computerScore++;
+        return "You Lose! computer select : rock beats you select : scissor";
     }
     else {
-        playerSoccer++;
-        return `You Win! ${playerSelection} beats ${computerSelection}`;
+        playerScore++;
+        return `You Win! you select : ${playerSelection} beats computer select : ${computerSelection}`;
     }
 
 }
-//final function playGame include 5 rounds
+//final function playGame include 5 rounds this without user interface function
+// function playGame() {
+//     for (let i = 0; i < 5; i++) {
+//         console.log(`round(${i+1})`);
+//     const playerSelection = prompt("Enter 'rock' 'scissor' or 'paper'").toLowerCase();
+//     const computerSelection = getComputerChoice();
+//     const currentRound = playRound(playerSelection, computerSelection);
+//     console.log(currentRound);
+//     }
+
+//     if(playerScore < computerScore){
+//         console.log(`Loser! your score ${playerScore} - computer score ${computerScore}`);
+//     }
+//     else if(playerScore > computerScore){
+//         console.log(`Winner! your score ${playerScore} - computer score ${computerScore}`);
+//     }
+//     else{
+//         console.log(`Draw! your score ${playerScore} - computer score ${computerScore}`);
+//     }
+// }
+
+// final function playGame with user interface function
+
 function playGame() {
-    for (let i = 0; i < 5; i++) {
-        console.log(`round(${i+1})`);
-    const playerSelection = prompt("Enter 'rock' 'scissor' or 'paper'").toLowerCase();
-    const computerSelection = getComputerChoice();
-    const currentRound = playRound(playerSelection, computerSelection);
-    console.log(currentRound);
-    }
-    if(playerSoccer < computerSoccer){
-        console.log(`Loser! your score ${playerSoccer} - computer score ${computerSoccer}`);
-    }
-    else if(playerSoccer > computerSoccer){
-        console.log(`Winner! your score ${playerSoccer} - computer score ${computerSoccer}`);
-    }
-    else{
-        console.log(`Draw! your score ${playerSoccer} - computer score ${computerSoccer}`);
-    }
-}
+    const result = document.querySelector(".result");
+    // create h1 element to show the result of current round
+    const displyResult = document.createElement("h1");
+    result.appendChild(displyResult);
+    // create h4 element to show the scores
+    const displayScore = document.createElement("h4");
+    result.appendChild(displayScore);
+    const buttons = document.querySelectorAll("button");
+    buttons.forEach(button => button.addEventListener("click", () => {
 
-let playerSoccer = 0;
-let computerSoccer = 0;
+        if (playerScore === 5) {
+            displayScore.textContent = `You won ${playerScore}-${computerScore}!`;
+            displyResult.textContent = "Congratulations!";
+
+        } else if (computerScore === 5) {
+            displayScore.textContent = `Computer wins ${computerScore}-${playerScore}.`;
+            displyResult.textContent = "Sorry try again";
+
+        }
+        else {
+            const playerSelection = button.textContent.toLowerCase();
+            const computerSelection = getComputerChoice();
+            const currentRound = playRound(playerSelection, computerSelection);
+            displyResult.textContent = currentRound;
+            displayScore.textContent = `Your Score: ${playerScore} | Computer Score: ${computerScore}`;
+        }
+
+    }))
+}
+document.body.style.textAlign = "center"; /* to center the whole body text horizantally*/ 
+let playerScore = 0;
+let computerScore = 0;
 playGame();
 
 

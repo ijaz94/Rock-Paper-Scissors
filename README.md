@@ -11,3 +11,6 @@
     
     the code is consist of total three function and
     two globe scope varaiable.
+   
+   After reading the Dom i convert my previous console display code to user interface code the logic is same but
+   instead of prompt now by button playerselect values.
